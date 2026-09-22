@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const authenticateToken = require("../middleware/auth");
+const adminOnly = require("../middleware/admin");
 
 const router = express.Router();
 
@@ -41,7 +42,7 @@ router.get("/:id", authenticateToken, async (req, res) => {
     }
 });
 
-router.post("/", authenticateToken, async (req, res) => {
+router.post("/", authenticateToken, adminOnly, async (req, res) => {
     try {
         const { name, description, price, category, inStock, imageUrl } = req.body;
 
@@ -79,7 +80,7 @@ router.post("/", authenticateToken, async (req, res) => {
     }
 });
 
-router.patch("/:id", authenticateToken, async (req, res) => {
+router.patch("/:id", authenticateToken, adminOnly, async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -117,7 +118,7 @@ router.patch("/:id", authenticateToken, async (req, res) => {
     }
 });
 
-router.delete("/:id", authenticateToken, async (req, res) => {
+router.delete("/:id", authenticateToken, adminOnly, async (req, res) => {
     try {
         const { id } = req.params;
 

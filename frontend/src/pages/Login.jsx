@@ -1,5 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
@@ -22,7 +23,7 @@ function Login() {
         }
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, {
+            const response = await api.post("/user/login", {
                 email,
                 password,
             });
